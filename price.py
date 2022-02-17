@@ -26,11 +26,13 @@ with open('price_config') as f:
         stock_info = yf.Ticker(items[0]).info
         # save regularMarketPrice to variable
         market_price = stock_info['regularMarketPrice']
-        print(type(market_price))
+        # print(type(market_price))
+        # skip if no stock info -> type = None
         if type(market_price) is not float:
             continue
+        # convert float to string
         m_price = str(market_price)
-        # create entry for beancount file       
+        # create entry for beancount file (convert m_price to Decimal, helps with exponential numbers)   
         price = "{0} price {3} {1} {2}".format(today, Decimal(m_price), items[1], items[2])
         # append price line to result list
         result.append(price)
