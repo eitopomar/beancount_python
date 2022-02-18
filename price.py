@@ -2,7 +2,12 @@
 from datetime import datetime
 import yfinance as yf
 import argparse
-from decimal import *
+from decimal import Decimal
+from progress.bar import ChargingBar
+
+# initialize progress bar
+num_lines = sum(1 for line in open('price_config'))
+bar = ChargingBar('Processing', max=num_lines + 1)
 
 # create parser
 parser = argparse.ArgumentParser()
@@ -16,7 +21,7 @@ result = []
 # get date of today and format for beancount
 now = datetime.now()
 today = now.strftime("%Y-%m-%d")
-
+bar.next()
 # iterate throug config file
 with open('price_config') as f:
     for line in f:
@@ -35,6 +40,7 @@ with open('price_config') as f:
         # create entry for beancount file (convert m_price to Decimal, helps with exponential numbers)   
         price = "{0} price {3} {1} {2}".format(today, Decimal(m_price), items[1], items[2])
         # append price line to result list
+        bar.next()
         result.append(price)
 
 # append results to file
@@ -43,3 +49,6 @@ with open(args.filename, 'a') as file_object:
     for i in result:
         file_object.write(i + "\n")
     file_object.write('; end automatic prices\n\n')
+    bar.next()
+
+bar.finish()
