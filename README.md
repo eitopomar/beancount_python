@@ -1,6 +1,6 @@
 # Python scripts for beancount
 
-I'm a beginner. I have no idea of what I'm doing. It works for me. It may work for you. I don't take any responsibility.
+I couldn't get the beancount price fetcher to work. So I wrote this script to fetch prices from yahoo finance with the easy to use yfinance.
 
 ## price.py
 
