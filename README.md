@@ -7,7 +7,7 @@ I couldn't get the beancount price fetcher to work. So I wrote this script to fe
 Fetch market prices from yahoo finance. Edit price_config file to your liking.
 
 price_config:
-| Symbol used to search yahoo | currency used in beancount-file | units used in beancount-file |
+| Symbol/ISIN used to search yahoo | currency used in beancount-file | units used in beancount-file |
 | - | - | - |
 | BTC-USD | USD | BTC |
 
